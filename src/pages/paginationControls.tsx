@@ -39,11 +39,11 @@ export default function Pagination({pagNumbers, selectedPageSize, selectedPageNu
                     </select>
                 </div>
                 <div className={styles.npContainer} >
-                    <button onClick={handlePrevious} className={styles.npButton} disabled={selectedPageNumber-1==0}>Prev</button>
+                    <button onClick={handlePrevious} className={styles.npButton} disabled={!isNaN(selectedPageNumber) && selectedPageNumber-1==0}>Prev</button>
                     <div>
                         {selectedPageNumber}
                     </div>
-                    <button onClick={handleNext} className={styles.npButton} disabled={selectedPageNumber==pagNumbers[pagNumbers?.length-1]}>Next</button>
+                    <button onClick={handleNext} className={styles.npButton} disabled={!isNaN(selectedPageNumber) && selectedPageNumber==pagNumbers[pagNumbers?.length-1]}>Next</button>
 
                 </div>
                 <div className={styles.pageSize}>
