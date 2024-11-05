@@ -1,4 +1,7 @@
-export default function ToDoList({todoList}) {
+import TableBodyProps from "@/class/TableBodyProps";
+
+
+export default function ToDoList({todoList}: TableBodyProps) {
     
     return (
         <>

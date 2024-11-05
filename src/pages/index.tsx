@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
@@ -7,6 +6,7 @@ import Header from "@/pages/header";
 import ToDoList from "./tablebody";
 import Pagination from "./paginationControls";
 import ToDoHeader from "./tableHeader";
+import { ToDoItem } from "@/class/TableBodyProps";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +24,7 @@ const geistMono = localFont({
 
 export default function Home() {
   
-  const [listItems, updateList] = useState<any[]>([]);
+  const [listItems, updateList] = useState<ToDoItem[]>([]);
   const [selectedPageSize, setPageSize] = useState<number>(10);
   const [pagNumbers, setPageNumbers] = useState<number[]>([1]);
   const [selectedPageNumber, setPageNumber] = useState<number>(1);
@@ -37,7 +37,7 @@ export default function Home() {
   function renderTable() {
     if(isReRender) {
       fetchToDoData().then(res => {
-        let todoList:any[] = [];
+        let todoList:ToDoItem[] = [];
         if(res && res.todos && res.todos.length > 0) {
             todoList = [...res.todos];
         } else {
@@ -52,13 +52,12 @@ export default function Home() {
   
   async function fetchToDoData() {
     try {
-        let pageNumbers = [];
-        let skip = (selectedPageNumber-1) * selectedPageSize;
-        console.log(skip);
+        const pageNumbers = [];
+        const skip = (selectedPageNumber-1) * selectedPageSize;
         const res = await fetch(`https://dummyjson.com/todos?limit=${selectedPageSize}&skip=${skip}`)
         const data = await res.json();
         if(data && data.total > 0) {
-            let count = data.total / selectedPageSize;
+            const count = data.total / selectedPageSize;
             for(let i=1;i<=count;i++) {
                 pageNumbers.push(i);
             }
@@ -76,12 +75,14 @@ export default function Home() {
     }
   }
   
-  function handlePageSizeChange(e: any) {
-    setPageSize(e.target.value);
+  function handlePageSizeChange(e: Event) {
+    const { value } = e.target as unknown as { value: number };
+    setPageSize(value);
     forceReRender(true);
   }
-  function handlePageNumberChange(e: any) {
-    setPageNumber(e.target.value);
+  function handlePageNumberChange(e: Event) {
+    const { value } = e.target as unknown as { value: number };
+    setPageNumber(value);
     forceReRender(true);
   }
 

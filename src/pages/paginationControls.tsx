@@ -1,17 +1,26 @@
 import styles from "@/styles/Home.module.css";
 
-export default function Pagination({pagNumbers, selectedPageSize, selectedPageNumber, handlePageNumberChange, handlePageSizeChange}) {
+interface PageProps {
+    pagNumbers: number[];
+    selectedPageSize: number;
+    selectedPageNumber: number;
+    handlePageNumberChange: (e:any) => void;
+    handlePageSizeChange: (e:any) => void;
+}
+
+
+export default function Pagination({pagNumbers, selectedPageSize, selectedPageNumber, handlePageNumberChange, handlePageSizeChange}:PageProps) {
 
     function handleNext() {
         if(selectedPageNumber + 1 <= pagNumbers[pagNumbers.length-1]) { 
-            let e = {target: {value: +selectedPageNumber+1}}
+            const e = {target: {value: +selectedPageNumber+1}}
             handlePageNumberChange(e)
         }
     }
 
     function handlePrevious() {
         if(selectedPageNumber - 1 > 0) {
-            let e = {target: {value: +selectedPageNumber-1}}
+            const e = {target: {value: +selectedPageNumber-1}}
             handlePageNumberChange(e)
         }
     }
