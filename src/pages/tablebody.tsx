@@ -7,7 +7,7 @@ export default function ToDoList({todoList}: TableBodyProps) {
         <>
             <tbody>
             {
-                todoList.map(todoRow => (
+                todoList?.map(todoRow => (
                     <tr key={todoRow.id}>
                         <td>{todoRow.id}</td>
                         <td>{todoRow.todo}</td>

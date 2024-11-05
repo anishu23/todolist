@@ -76,14 +76,18 @@ export default function Home() {
   }
   
   function handlePageSizeChange(e: Event) {
-    const { value } = e.target as unknown as { value: number };
-    setPageSize(value);
-    forceReRender(true);
+    if(e) {
+      const { value } = e.target as unknown as { value: number };
+      setPageSize(value);
+      forceReRender(true);
+    }
   }
   function handlePageNumberChange(e: Event) {
-    const { value } = e.target as unknown as { value: number };
-    setPageNumber(value);
-    forceReRender(true);
+    if(e) {
+      const { value } = e.target as unknown as { value: number };
+      setPageNumber(value);
+      forceReRender(true);
+    }
   }
 
   return (

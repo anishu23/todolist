@@ -12,15 +12,15 @@ interface PageProps {
 export default function Pagination({pagNumbers, selectedPageSize, selectedPageNumber, handlePageNumberChange, handlePageSizeChange}:PageProps) {
 
     function handleNext() {
-        if(selectedPageNumber + 1 <= pagNumbers[pagNumbers.length-1]) { 
-            const e = {target: {value: +selectedPageNumber+1}}
+        if(selectedPageNumber + 1 <= pagNumbers[pagNumbers?.length-1]) { 
+            const e = {target: {value: selectedPageNumber+1}}
             handlePageNumberChange(e)
         }
     }
 
     function handlePrevious() {
         if(selectedPageNumber - 1 > 0) {
-            const e = {target: {value: +selectedPageNumber-1}}
+            const e = {target: {value: selectedPageNumber-1}}
             handlePageNumberChange(e)
         }
     }
@@ -43,13 +43,13 @@ export default function Pagination({pagNumbers, selectedPageSize, selectedPageNu
                     <div>
                         {selectedPageNumber}
                     </div>
-                    <button onClick={handleNext} className={styles.npButton} disabled={selectedPageNumber==pagNumbers[pagNumbers.length-1]}>Next</button>
+                    <button onClick={handleNext} className={styles.npButton} disabled={selectedPageNumber==pagNumbers[pagNumbers?.length-1]}>Next</button>
 
                 </div>
                 <div className={styles.pageSize}>
                     <select className={styles.pageSelector} name="pageNumber" id="pageNumber" value={selectedPageNumber} onChange={handlePageNumberChange}>
                         {
-                            pagNumbers.map(pageNumber => (
+                            pagNumbers?.map(pageNumber => (
                                 <option key={pageNumber} value={pageNumber}>{pageNumber}</option>
                             ))
                         }
